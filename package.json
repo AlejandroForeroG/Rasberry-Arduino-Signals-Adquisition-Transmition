@@ -4,8 +4,11 @@
   "description": "In this pakage we will adquire the data from arduino whic will be transmited later to the server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "Juan Alejandro Forero Gomez",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^10.5.0"
+  }
 }
