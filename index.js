@@ -1,4 +1,5 @@
 // importacion de modulos 
+require
 const {SerialPort} =require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline')
 
@@ -17,6 +18,4 @@ port.on("open", () => {
 port.on('data', (data) => {
     console.log(data.toString());
 });
-// port.on("error",()=>{
-//     console.log("error de obtencion")
-// })
+
