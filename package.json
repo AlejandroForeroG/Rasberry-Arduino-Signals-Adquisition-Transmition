@@ -1,0 +1,11 @@
+{
+  "name": "signals",
+  "version": "1.0.0",
+  "description": "In this pakage we will adquire the data from arduino whic will be transmited later to the server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Alejandro Forero Gomez",
+  "license": "ISC"
+}
