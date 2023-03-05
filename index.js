@@ -1,3 +1,4 @@
+// importacion de modulos 
 const {SerialPort} =require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline')
 
@@ -9,10 +10,13 @@ const port = new SerialPort(
 });
 
 
-
-port.on("open", () => {
+// Escuchador de eventos en el serial 
+port.on("open", () => { 
     console.log('serial port open');
 });
 port.on('data', (data) => {
-    console.log('got word from arduino:', data.toString());
+    console.log(data.toString());
 });
+// port.on("error",()=>{
+//     console.log("error de obtencion")
+// })
