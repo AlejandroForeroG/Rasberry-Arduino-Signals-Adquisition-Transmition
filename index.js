@@ -1,8 +1,15 @@
-// importacion de modulos 
-require
 const {SerialPort} =require('serialport');
-const { ReadlineParser } = require('@serialport/parser-readline')
+const {ReadlineParser } = require('@serialport/parser-readline')
+const io = require('socket.io-client');
+var socket = io.connect('http://192.168.10.20:3000');
 
+//socket establishment
+socket.on('connect',()=>{
+    console.log("Coneccion establecida con el servidor");
+})
+
+
+//data read
 console.log("Importado");
 
 const port = new SerialPort(
@@ -10,12 +17,16 @@ const port = new SerialPort(
     baudRate:115200
 });
 
+const parser = port.pipe(new ReadlineParser("\n"));
 
-// Escuchador de eventos en el serial 
-port.on("open", () => { 
-    console.log('serial port open');
+parser.on('open',()=>{
+    console.log("coneccion abierta");
 });
-port.on('data', (data) => {
-    console.log(data.toString());
-});
+
+parser.on('data',(data)=>{
+    console.log(data);
+})
+
+
+
 

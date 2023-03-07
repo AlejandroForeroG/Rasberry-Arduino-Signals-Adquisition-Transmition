@@ -4,12 +4,13 @@
   "description": "In this pakage we will adquire the data from arduino whic will be transmited later to the server",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node send.js"
   },
   "author": "Juan Alejandro Forero Gomez",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "serialport": "^10.5.0"
+    "serialport": "^10.5.0",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
   }
 }
