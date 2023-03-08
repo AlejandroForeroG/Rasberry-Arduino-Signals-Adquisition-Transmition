@@ -1,15 +1,11 @@
 const {SerialPort} =require('serialport');
 const {ReadlineParser } = require('@serialport/parser-readline')
-const io = require('socket.io-client');
-var socket = io.connect('http://192.168.10.20:3000');
+const io = require('socket.io-client')
 
-//socket establishment
-socket.on('connect',()=>{
-    console.log("Coneccion establecida con el servidor");
-})
+//const socket = io("http://192.168.10.20")
+//const ioo = require('socket.io');
 
 
-//data read
 console.log("Importado");
 
 const port = new SerialPort(
@@ -19,13 +15,35 @@ const port = new SerialPort(
 
 const parser = port.pipe(new ReadlineParser("\n"));
 
-parser.on('open',()=>{
-    console.log("coneccion abierta");
-});
+//socket establishment
+const socket = io.connect('http://192.168.10.20:3000');
 
-parser.on('data',(data)=>{
-    console.log(data);
+
+socket.on('connect',()=>{
+    console.log("Coneccion establecida con el servidor");
+
+    parser.on('open', () => {
+        console.log("coneccion abierta");
+    });
+
+    parser.on('data', (data) => {
+        socket.emit('rasberry:data', {
+            value: data.toString()
+        });
+        console.log(data);
+    })
+
+    socket.on("disconnect",()=>{
+        console.log("desconeccion del servidor");
+    })
+
+
 })
+
+
+//data read
+
+
 
 
 
