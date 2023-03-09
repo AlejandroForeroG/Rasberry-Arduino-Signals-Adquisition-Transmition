@@ -1,9 +1,7 @@
 const {SerialPort} =require('serialport');
 const {ReadlineParser } = require('@serialport/parser-readline')
 const io = require('socket.io-client')
-
-//const socket = io("http://192.168.10.20")
-//const ioo = require('socket.io');
+const { getTime,getDate} =  require('./obj');
 
 
 console.log("Importado");
@@ -18,7 +16,7 @@ const parser = port.pipe(new ReadlineParser("\n"));
 //socket establishment
 const socket = io.connect('http://192.168.10.20:3000');
 
-
+//scoket events 
 socket.on('connect',()=>{
     console.log("Coneccion establecida con el servidor");
 
@@ -27,10 +25,22 @@ socket.on('connect',()=>{
     });
 
     parser.on('data', (data) => {
+        //processing data 
+        let splitter =data.split(" ");
+
+        //transmission 
         socket.emit('rasberry:data', {
-            value: data.toString()
+            sampleGen:splitter[0],
+            date: getDate("/"),
+            time: getTime(),
+            temperature: splitter[1],
+            bmp:splitter[2],
+            oxigenSaturation:splitter[3],
+            gsrResistance:splitter[4],
+            grsVoltage:splitter[5],
+            airflux: splitter[6]
         });
-        console.log(data);
+
     })
 
     socket.on("disconnect",()=>{
@@ -40,8 +50,7 @@ socket.on('connect',()=>{
 
 })
 
-
-//data read
+//functions
 
 
 
